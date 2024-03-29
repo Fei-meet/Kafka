@@ -23,17 +23,29 @@ public class KafkaProducerTest {
         //      生产者对象需要设定泛型：数据的类型约束
         KafkaProducer<String,String> producer = new KafkaProducer<String,String>(configMap);
 
+
+//  生产单个数据
         //TODO:创建数据
         //      构建数据时，需要传递三个参数
         //      第一个参数表示主题的名称
         //      第二个参数表示数据的KEY
         //      第三个参数表示数据的VALUE
-        ProducerRecord<String,String> record = new ProducerRecord<String,String>(
-                "test","key","value"
-        );
+
+        //ProducerRecord<String,String> record = new ProducerRecord<String,String>(
+        //      "test","key","value"
+        //);
 
         //TODO: 通过生产者对象将数据发送到 Kafka
-        producer.send(record);
+        //producer.send(record);
+
+//  生产多条数据
+        for (int i = 0; i < 10; i++) {
+            ProducerRecord<String,String> record = new ProducerRecord<String,String>(
+                          "test","key"+i,"value"+i
+                    );
+            producer.send(record);
+        }
+
 
         //TODO: 关闭生产者对象
         producer.close();
